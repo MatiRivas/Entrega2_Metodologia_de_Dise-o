@@ -11,6 +11,7 @@ from src.pagos.pago_transferencia import PagoTransferencia
 from src.pagos.pago_cripto import PagoCripto
 from src.pagos.pago_contra_entrega import PagoContraEntrega
 from src.factura.factura import Factura
+from src.pedidos.gestor_pedido import GestionPedidos
 
 def main():
     # Crear un cliente nuevo de tipo VIP
@@ -47,12 +48,35 @@ def main():
     print(f"Stock de leche después del pedido: {producto3.get_stock()}")
     print()
     
+    gestor_pedidos_singleton = GestionPedidos() # inicializa el Singleton para gestionar pedidos (obtiene la unica instancia de GestionPedidos)
+
     pedido_estandar = EstandarPedido(100, EstadoPedido.PENDIENTE, productos_pedido1, cliente)
     pedido_int = InternacionalPedido(101, EstadoPedido.PENDIENTE, productos_pedido2, cliente, 25)
+    pedido_express = ExpressPedido(102, EstadoPedido.PAGADO, productos_pedido1, cliente, 1000)
+
+    gestor_pedidos_singleton.registrar_pedido(pedido_estandar)
+    gestor_pedidos_singleton.registrar_pedido(pedido_int)
+    gestor_pedidos_singleton.registrar_pedido(pedido_express)
+
+    gestor_pedidos_singleton.listar_pedidos()
+
+    print("\n")
     
+    print("-------------- Cambios de estado de pedido con el singleton ---------------")
+
+    exito_cambio1 = gestor_pedidos_singleton.modificar_estado_pedido(100, EstadoPedido.PAGADO)
+
+    if exito_cambio1:
+        print(f"Cambio a {EstadoPedido.PAGADO.value} fue exitoso.")
+    else:
+        print(f"Cambio a {EstadoPedido.PAGADO.value} falló.")
+    print("----------------------------------------------------------------------------")
+
     pedido_int.descontar_stock_de_productos()
     pedido_estandar.descontar_stock_de_productos()
-    
+
+    print("\n")
+
     print("-------------- Descuentos despues del pedido ---------------")
     print(f"Stock de chocolates después del pedido: {producto1.get_stock()}")
     print(f"Stock de vainillas después del pedido: {producto2.get_stock()}")
