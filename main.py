@@ -1,4 +1,7 @@
-from src.cliente.cliente import Cliente
+from src.cliente.cliente_concreto import Cliente
+from src.cliente.descuento_extra_decorator import DescuentoExtraDecorator
+from src.cliente.envio_gratis_decorator import EnvioGratisDecorator
+from src.cliente.cashback_decorator import CashbackDecorator
 from src.cliente.tipo_cliente import TipoCliente
 from src.producto.producto import Producto
 from src.pedidos.estado_pedido import EstadoPedido
@@ -21,12 +24,17 @@ def main():
         "Mozart 1490, Villa Alemana",
         TipoCliente.VIP
     )
-    
+    # Decorar el cliente con beneficios temporales
+    cliente = DescuentoExtraDecorator(cliente, 0.05)  # +5% descuento extra
+    cliente = EnvioGratisDecorator(cliente)            # Envío gratis forzado
+    cliente = CashbackDecorator(cliente, 0.03)         # 3% cashback
     # Mostrar información
     print(f"Nombre: {cliente.get_nombre()}")
     print(f"Tipo: {cliente.get_tipo_cliente().value}")
     print(f"Descuento: {cliente.get_descuento() * 100}%")
     print(f"¿Envío gratis?: {cliente.tiene_envio_gratis()}")
+    if isinstance(cliente, CashbackDecorator):
+        print(f"Cashback: {cliente.get_cashback() * 100}%")
     print()
     
     producto1 = Producto("Chocolate", "123456", 2500, 100)
