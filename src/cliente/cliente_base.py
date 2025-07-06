@@ -16,3 +16,6 @@ class ClienteBase(ABC):
     @abstractmethod
     def get_direccion(self):
         pass
+    @abstractmethod
+    def get_email(self):
+        pass

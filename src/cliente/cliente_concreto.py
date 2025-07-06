@@ -22,3 +22,5 @@ class Cliente(ClienteBase):
         return self.tipo_cliente
     def get_direccion(self):
         return self.direccion
+    def get_email(self):
+        return self.email

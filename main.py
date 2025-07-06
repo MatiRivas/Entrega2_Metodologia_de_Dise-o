@@ -1,7 +1,4 @@
 from src.cliente.cliente_concreto import Cliente
-from src.cliente.descuento_extra_decorator import DescuentoExtraDecorator
-from src.cliente.envio_gratis_decorator import EnvioGratisDecorator
-from src.cliente.cashback_decorator import CashbackDecorator
 from src.cliente.tipo_cliente import TipoCliente
 from src.producto.producto import Producto
 from src.pedidos.estado_pedido import EstadoPedido
@@ -13,6 +10,7 @@ from src.pagos.pago_tarjeta import PagoTarjeta
 from src.pagos.pago_transferencia import PagoTransferencia
 from src.pagos.pago_cripto import PagoCripto
 from src.pagos.pago_contra_entrega import PagoContraEntrega
+from src.pagos.proxy_pago import ProxyPago
 from src.factura.factura import Factura
 from src.pedidos.gestor_pedido import GestionPedidos
 
@@ -24,17 +22,14 @@ def main():
         "Mozart 1490, Villa Alemana",
         TipoCliente.VIP
     )
-    # Decorar el cliente con beneficios temporales
-    cliente = DescuentoExtraDecorator(cliente, 0.05)  # +5% descuento extra
-    cliente = EnvioGratisDecorator(cliente)            # Envío gratis forzado
-    cliente = CashbackDecorator(cliente, 0.03)         # 3% cashback
+    
     # Mostrar información
     print(f"Nombre: {cliente.get_nombre()}")
+    print(f"Email: {cliente.get_email()}")
+    print(f"Dirección: {cliente.get_direccion()}")  
     print(f"Tipo: {cliente.get_tipo_cliente().value}")
     print(f"Descuento: {cliente.get_descuento() * 100}%")
     print(f"¿Envío gratis?: {cliente.tiene_envio_gratis()}")
-    if isinstance(cliente, CashbackDecorator):
-        print(f"Cashback: {cliente.get_cashback() * 100}%")
     print()
     
     producto1 = Producto("Chocolate", "123456", 2500, 100)
@@ -100,16 +95,32 @@ def main():
     factura1 = Factura(pedido_estandar)
     factura1.imprimir_factura()
     print()
-    
-    factura1.pagar_factura("tarjeta", gestor)
+
+    # Usar ProxyPago para validaciones antes de pagar
+    metodo_tarjeta = gestor.obtener_metodo("tarjeta")
+    proxy_tarjeta = ProxyPago(metodo_tarjeta, cliente)
+    monto1 = factura1.get_monto_final()
+    exito_pago1 = proxy_tarjeta.procesar_pago(monto1)
+    if exito_pago1:
+        pedido_estandar.cambiar_estado(EstadoPedido.PAGADO)
     print(f"Estado actual del pedido: {pedido_estandar.get_estado().value}")
     print()
-    
+
     factura2 = Factura(pedido_int)
     factura2.imprimir_factura()
-    
+
     print(f"Estado antes de pagar con cripto: {pedido_int.get_estado().value}")
-    factura2.pagar_factura("cripto", gestor)
+    metodo_cripto = gestor.obtener_metodo("cripto")
+    proxy_cripto = ProxyPago(metodo_cripto, cliente)
+    monto2 = factura2.get_monto_final()
+    # Aplicar todas las verificaciones explícitamente antes de procesar el pago
+    if proxy_cripto.verificar_datos_cliente() and proxy_cripto.control_fraude(monto2):
+        proxy_cripto.registrar_auditoria(monto2)
+        exito_pago2 = proxy_cripto.procesar_pago(monto2)
+        if exito_pago2:
+            pedido_int.cambiar_estado(EstadoPedido.PAGADO)
+    else:
+        print("No se pudo procesar el pago por fallas en las verificaciones.")
     print(f"Estado despues de pagar con cripto: {pedido_int.get_estado().value}")
     print()
     
