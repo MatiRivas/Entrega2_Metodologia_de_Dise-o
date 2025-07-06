@@ -6,7 +6,7 @@ class ProxyPago(MetodoPago):
         self.metodo_pago = metodo_pago
         self.cliente = cliente
 
-    def procesar_pago(self, monto):
+    def procesar_pago(self, monto, **kwargs):
         if not self.verificar_datos_cliente():
             print('Datos del cliente inválidos')
             return False

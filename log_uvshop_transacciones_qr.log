@@ -1,0 +1,14 @@
+[2025-07-06 13:56:04] TRANSACCION EXITOSA | ID: 7c4c6970-685a-4aad-96ba-b496b2e1464d | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 13:56:22] TRANSACCION EXITOSA | ID: 0343021a-b12d-42f7-95d9-f3c5469d3d3e | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 13:56:55] TRANSACCION EXITOSA | ID: d9f4a2b9-7b56-499f-bd19-8bd447324f40 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 13:59:55] TRANSACCION FALLIDA | ID: 641fcce0-a916-4d67-81c2-f4118b01bedd | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inv�lido o expirado
+[2025-07-06 13:59:55] TRANSACCION EXITOSA | ID: c21b0fcd-850b-449c-be5c-80aa5fe666b1 | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 14:46:28] TRANSACCION EXITOSA | ID: 5aed5ca1-f88c-408d-ba24-21a20969ac8e | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 14:49:28] TRANSACCION FALLIDA | ID: 7f74f716-f9b2-4ab5-90ba-fb2ffd0dd25f | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inv�lido o expirado
+[2025-07-06 14:49:28] TRANSACCION EXITOSA | ID: 2e25f7e1-3b32-4f49-b801-a6c8254a4696 | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 14:49:44] TRANSACCION EXITOSA | ID: ab59d6c9-978c-496c-8b58-6e6b63102f4a | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 14:51:19] TRANSACCION EXITOSA | ID: 36b15e16-ec35-470a-9fc5-6431765904fe | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 14:51:38] TRANSACCION EXITOSA | ID: 63bccd5f-1425-4698-b1f5-440d16d8eec9 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 14:54:38] TRANSACCION FALLIDA | ID: 11a98074-5902-44a4-94b8-0a0d4899dd15 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inv�lido o expirado
+[2025-07-06 14:54:38] TRANSACCION EXITOSA | ID: a919f2ee-e519-4c3b-b3f3-97bf08044e0a | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 14:56:41] TRANSACCION EXITOSA | ID: d4aa0c06-30b0-420b-a217-c40e5e157290 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com

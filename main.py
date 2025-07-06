@@ -14,6 +14,12 @@ from src.pagos.proxy_pago import ProxyPago
 from src.factura.factura import Factura
 from src.pedidos.gestor_pedido import GestionPedidos
 
+from src.pagos.pago_QR import PagoQR
+from src.pagos.proxy_pagoQR import ProxyPagoQR
+from src.auditoria.registro_transacciones import RegistroTransacciones
+from src.seguridad.gestor_tokens_temporales import GestorTokensTemporales
+import time
+
 def main():
     # Crear un cliente nuevo de tipo VIP
     cliente = Cliente(
@@ -144,6 +150,99 @@ def main():
     cancel_exito = pedido_express.cambiar_estado(EstadoPedido.CANCELADO)
     print(f"Cancelar otroPedido: {'OK' if cancel_exito else 'No válido'}")
     print(f"Estado actual otroPedido: {pedido_express.get_estado().value}")
+
+    # --- INICIO DE LA DEMOSTRACIÓN DE PAGO QR CON EL NUEVO PROXY ---
+    print("\n\n--- INICIANDO DEMOSTRACIÓN DE PAGO QR CON PROXY ESPECÍFICO ---")
+
+    # 1. Instancias de las nuevas dependencias
+    registro_transacciones_qr = RegistroTransacciones(archivo_log="log_uvshop_transacciones_qr.log")
+    gestor_tokens_qr = GestorTokensTemporales()
+    
+    # 2. Cliente y Producto para la demo QR
+    cliente_qr = Cliente("Alice QR", "alice.qr@example.com", "Av. Siempre Viva 742", TipoCliente.FRECUENTE)
+    producto_qr_ejemplo = Producto("Cargador Universal QR", "QRDEV001", 350.00, 50)
+    producto_qr_bajo = Producto("Cable USB-C", "QRACC002", 80.00, 100) # Para probar monto bajo
+
+    # 3. Pedido para el pago QR
+    pedido_qr_exitoso = EstandarPedido(300, EstadoPedido.PENDIENTE, {producto_qr_ejemplo: 1}, cliente_qr)
+    factura_qr_exitoso = Factura(pedido_qr_exitoso)
+    monto_qr_exitoso = factura_qr_exitoso.get_monto_final()
+
+    pedido_qr_fallo_monto = EstandarPedido(301, EstadoPedido.PENDIENTE, {producto_qr_bajo: 1}, cliente_qr)
+    factura_qr_fallo_monto = Factura(pedido_qr_fallo_monto)
+    monto_qr_fallo_monto = factura_qr_fallo_monto.get_monto_final()
+
+
+    # 4. Instancia del Sujeto Real (PagoCodigoQR)
+    pago_qr_real_instance = PagoQR()
+
+    # 5. Instancia del Proxy Específico para QR
+    proxy_pago_qr_instance = ProxyPagoQR(
+        metodo_pago_real=pago_qr_real_instance,
+        registro=registro_transacciones_qr,
+        gestor_tokens=gestor_tokens_qr
+    )
+
+    # 6. Registrar el nuevo método de pago (el proxy) en el gestor de pagos
+    gestor.registrar_metodo("codigo_qr", proxy_pago_qr_instance)
+
+
+    # --- CASO DE PRUEBA 1: Pago QR Exitoso ---
+    print("\n--- TEST: Pago QR Exitoso ---")
+    print(f"Estado inicial del Pedido {pedido_qr_exitoso.get_id()}: {pedido_qr_exitoso.get_estado().value}")
+    
+    # Simular la generación y obtención del token por parte del frontend/cliente
+    token_para_alice = gestor_tokens_qr.generar_token(cliente_qr.get_email())
+    
+    print("\n[DEMO QR] Intentando procesar pago QR con token válido...")
+    # Llamamos al método procesar_pago del proxy, pasándole el cliente y el token
+    # El gestor de pagos lo hará por nosotros si se lo pides, o puedes llamarlo directo para la demo
+    pago_qr_ok = proxy_pago_qr_instance.procesar_pago(monto_qr_exitoso, cliente=cliente_qr, token_temporal=token_para_alice)
+
+    if pago_qr_ok:
+        pedido_qr_exitoso.cambiar_estado(EstadoPedido.PAGADO)
+        print(f"[DEMO QR] Pago QR de ${monto_qr_exitoso} exitoso para {cliente_qr.get_email()}.")
+    else:
+        print(f"[DEMO QR] Pago QR de ${monto_qr_exitoso} fallido para {cliente_qr.get_email()}.")
+    print(f"Estado final del Pedido {pedido_qr_exitoso.get_id()}: {pedido_qr_exitoso.get_estado().value}")
+
+
+    # --- CASO DE PRUEBA 2: Pago QR Fallido por Token Expirado ---
+    print("\n--- TEST: Pago QR Fallido por Token Expirado ---")
+    print(f"Estado inicial del Pedido {pedido_qr_fallo_monto.get_id()}: {pedido_qr_fallo_monto.get_estado().value}")
+
+    token_para_expirar = gestor_tokens_qr.generar_token(cliente_qr.get_email())
+    print(f"[DEMO QR] Generado token para expirar: {token_para_expirar}. Esperando {gestor_tokens_qr.TOKEN_EXPIRATION_MINUTES + 1} minutos...")
+    time.sleep((gestor_tokens_qr.TOKEN_EXPIRATION_MINUTES + 1) * 60) # Espera para que el token expire
+    
+    print("\n[DEMO QR] Intentando procesar pago QR con token expirado...")
+    pago_qr_fallo_exp = proxy_pago_qr_instance.procesar_pago(monto_qr_exitoso, cliente=cliente_qr, token_temporal=token_para_expirar)
+
+    if not pago_qr_fallo_exp:
+        print(f"[DEMO QR] Pago QR fallido por token expirado (como se esperaba).")
+    else:
+        print(f"[DEMO QR] ERROR: Pago QR con token expirado ¡no falló!")
+    print(f"Estado final del Pedido {pedido_qr_fallo_monto.get_id()}: {pedido_qr_fallo_monto.get_estado().value}")
+
+
+    # --- CASO DE PRUEBA 3: Pago QR Fallido por Monto Demasiado Bajo (rechazo de pasarela real) ---
+    print("\n--- TEST: Pago QR Fallido por Monto Demasiado Bajo ---")
+    print(f"Estado inicial del Pedido {pedido_qr_fallo_monto.get_id()}: {pedido_qr_fallo_monto.get_estado().value}")
+    
+    token_para_bob = gestor_tokens_qr.generar_token(cliente_qr.get_email()) # Usa el mismo cliente para simplificar
+    
+    print(f"\n[DEMO QR] Intentando procesar pago QR de ${monto_qr_fallo_monto} (monto bajo) con token válido...")
+    pago_qr_fallo_monto_bajo = proxy_pago_qr_instance.procesar_pago(monto_qr_fallo_monto, cliente=cliente_qr, token_temporal=token_para_bob)
+
+    if not pago_qr_fallo_monto_bajo:
+        print(f"[DEMO QR] Pago QR fallido por monto bajo (rechazado por la pasarela real - como se esperaba).")
+    else:
+        print(f"[DEMO QR] ERROR: Pago QR con monto bajo ¡no falló!")
+    print(f"Estado final del Pedido {pedido_qr_fallo_monto.get_id()}: {pedido_qr_fallo_monto.get_estado().value}")
+
+
+    print("\n--- FIN DEMOSTRACIÓN DE PAGO QR ---")
+
 
 if __name__ == "__main__":
     main()
