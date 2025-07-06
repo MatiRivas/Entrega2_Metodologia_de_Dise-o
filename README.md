@@ -84,3 +84,10 @@ python main.py
 5. **Sistemas de Pago**: Múltiples métodos de pago intercambiables
 6. **Facturación**: Cálculo automático de totales, descuentos e impuestos
 7. **Modularización**: Estructura organizada en paquetes y módulos
+
+
+## Supuestos
+
+1. **Gestión de pedidos**: Modificar los pedidos lo consideramos como modificar su estado, al igual que en la entrega anterior, pero esta vez desde el componente único como se pide.
+2. 
+
