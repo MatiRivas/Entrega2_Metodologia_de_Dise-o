@@ -12,3 +12,24 @@
 [2025-07-06 14:54:38] TRANSACCION FALLIDA | ID: 11a98074-5902-44a4-94b8-0a0d4899dd15 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal invï¿½lido o expirado
 [2025-07-06 14:54:38] TRANSACCION EXITOSA | ID: a919f2ee-e519-4c3b-b3f3-97bf08044e0a | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
 [2025-07-06 14:56:41] TRANSACCION EXITOSA | ID: d4aa0c06-30b0-420b-a217-c40e5e157290 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:26:45] TRANSACCION EXITOSA | ID: 4c86ff98-7475-412b-a08d-1df263ef8fbf | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:27:15] TRANSACCION FALLIDA | ID: c3680e33-8fb7-4a61-bf88-d7b0a3f2f2ec | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inválido o expirado
+[2025-07-06 17:27:15] TRANSACCION EXITOSA | ID: bd58ca74-78b9-427d-a513-1136653802e6 | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:27:53] TRANSACCION EXITOSA | ID: 80adcf40-7a58-4464-98c9-403010e96671 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:28:03] TRANSACCION FALLIDA | ID: 8dba310a-eef4-44ed-9cd4-3b37c30dc327 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inválido o expirado
+[2025-07-06 17:28:03] TRANSACCION EXITOSA | ID: 0350528c-6167-4cc8-80ba-f685d13b1812 | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:28:32] TRANSACCION EXITOSA | ID: 2be8f1df-cbb4-4fee-9c54-50518a4db012 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:28:42] TRANSACCION FALLIDA | ID: 77251e2d-a9f1-4384-95f3-2ae6f6e7e965 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inválido o expirado
+[2025-07-06 17:28:42] TRANSACCION EXITOSA | ID: 3332aded-a384-47b7-a4f6-cc188de917f4 | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:32:35] TRANSACCION EXITOSA | ID: ab29a1bd-18c3-428b-990a-86c43f2d8de7 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:32:45] TRANSACCION FALLIDA | ID: 35870050-c9d5-4908-a95e-0366eb8a0a06 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inválido o expirado
+[2025-07-06 17:32:45] TRANSACCION EXITOSA | ID: 0543ac57-5c4f-4d76-b991-341a0963c73d | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:38:33] TRANSACCION EXITOSA | ID: b290d670-d888-4e36-83ce-ceb333b53348 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:38:43] TRANSACCION FALLIDA | ID: ab73674a-6585-41aa-9088-0c91aab9c6bb | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inválido o expirado
+[2025-07-06 17:38:43] TRANSACCION EXITOSA | ID: af1d4dd4-f672-4f0a-a8f1-aa0700090da7 | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:54:12] TRANSACCION EXITOSA | ID: 32a8bf62-c9eb-410e-ac95-861c31162887 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:54:22] TRANSACCION FALLIDA | ID: 5f29cc1d-604a-49de-b84d-20acf0abc1af | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inválido o expirado
+[2025-07-06 17:54:22] TRANSACCION EXITOSA | ID: d6be2314-17fe-4ca6-aac4-029df53f1aef | Monto: 72.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:55:28] TRANSACCION EXITOSA | ID: fbd0ae24-2abf-49bc-8a70-efec0e45d819 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com
+[2025-07-06 17:55:38] TRANSACCION FALLIDA | ID: 85af8395-5541-421f-9180-fd04face69f2 | Monto: 315.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Token temporal inválido o expirado
+[2025-07-06 17:55:38] TRANSACCION FALLIDA | ID: 089a46e2-0f22-450a-b32c-539267844bf5 | Monto: 9.0 | Metodo: QR | Cliente: alice.qr@example.com | Razon: Pago rechazado por la pasarela real (retorno False)

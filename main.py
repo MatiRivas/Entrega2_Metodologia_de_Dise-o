@@ -161,7 +161,7 @@ def main():
     # 2. Cliente y Producto para la demo QR
     cliente_qr = Cliente("Alice QR", "alice.qr@example.com", "Av. Siempre Viva 742", TipoCliente.FRECUENTE)
     producto_qr_ejemplo = Producto("Cargador Universal QR", "QRDEV001", 350.00, 50)
-    producto_qr_bajo = Producto("Cable USB-C", "QRACC002", 80.00, 100) # Para probar monto bajo
+    producto_qr_bajo = Producto("Cable USB-C", "QRACC002", 10.00, 100) # Para probar monto bajo
 
     # 3. Pedido para el pago QR
     pedido_qr_exitoso = EstandarPedido(300, EstadoPedido.PENDIENTE, {producto_qr_ejemplo: 1}, cliente_qr)
@@ -212,8 +212,8 @@ def main():
     print(f"Estado inicial del Pedido {pedido_qr_fallo_monto.get_id()}: {pedido_qr_fallo_monto.get_estado().value}")
 
     token_para_expirar = gestor_tokens_qr.generar_token(cliente_qr.get_email())
-    print(f"[DEMO QR] Generado token para expirar: {token_para_expirar}. Esperando {gestor_tokens_qr.TOKEN_EXPIRATION_MINUTES + 1} minutos...")
-    time.sleep((gestor_tokens_qr.TOKEN_EXPIRATION_MINUTES + 1) * 60) # Espera para que el token expire
+    print(f"[DEMO QR] Generado token para expirar: {token_para_expirar}. Esperando {gestor_tokens_qr.TOKEN_EXPIRATION_SECONDS} segundos...")
+    time.sleep(gestor_tokens_qr.TOKEN_EXPIRATION_SECONDS) # Espera para que el token expire
     
     print("\n[DEMO QR] Intentando procesar pago QR con token expirado...")
     pago_qr_fallo_exp = proxy_pago_qr_instance.procesar_pago(monto_qr_exitoso, cliente=cliente_qr, token_temporal=token_para_expirar)

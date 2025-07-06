@@ -8,10 +8,10 @@ class GestorTokensTemporales:
     # ¡En un entorno real, DEBE obtenerse de variables de entorno o un servicio de secretos!
     SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your_very_strong_and_secret_key_for_uvshop_2025")
     ALGORITHM = "HS256"
-    TOKEN_EXPIRATION_MINUTES = 2 # Reducido a 2 minutos para pruebas más rápidas
+    TOKEN_EXPIRATION_SECONDS = 10 # Reducido a 10 segundos para pruebas más rápidas
 
     def generar_token(self, cliente_email: str) -> str:
-        expire_time = datetime.datetime.now(timezone.utc) + timedelta(minutes=self.TOKEN_EXPIRATION_MINUTES)
+        expire_time = datetime.datetime.now(timezone.utc) + timedelta(seconds=self.TOKEN_EXPIRATION_SECONDS)
         
         payload = {
             "sub": cliente_email,
@@ -21,7 +21,7 @@ class GestorTokensTemporales:
         
         token = jwt.encode(payload, self.SECRET_KEY, algorithm=self.ALGORITHM)
         
-        print(f"[TOKEN] Token temporal JWT generado para {cliente_email}. Expira en {self.TOKEN_EXPIRATION_MINUTES} minutos (UTC: {expire_time.strftime('%Y-%m-%d %H:%M:%S')}).")
+        print(f"[TOKEN] Token temporal JWT generado para {cliente_email}. Expira en {self.TOKEN_EXPIRATION_SECONDS} minutos (UTC: {expire_time.strftime('%Y-%m-%d %H:%M:%S')}).")
         return token
 
     def validar_token(self, token: str, cliente_email: str) -> bool:
