@@ -25,3 +25,6 @@ class Producto:
     
     def get_stock(self):
         return self.stock
+
+    def get_codigo(self):
+        return self.codigo
