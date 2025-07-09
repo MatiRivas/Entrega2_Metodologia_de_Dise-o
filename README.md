@@ -15,10 +15,18 @@ Este proyecto implementa un sistema de gestión de pedidos modularizado siguiend
 ## 🏗️ Estructura del Proyecto
 
 ```
-Entrega2_MDD/
+Entrega2_Metodologia_de_Dise-o/
 ├── app.py                       # Punto de entrada FastAPI
+├── main.py                      # Archivo con ejemplos del dominio
+├── requirements.txt             # Dependencias del proyecto
+├── README.md                    # Documentación principal
+├── ARQUITECTURA_MVC.md         # Documentación de arquitectura
+├── EJEMPLOS_USO.md             # Ejemplos de uso de la API
+├── log_uvshop_transacciones_qr.log  # Log de transacciones QR
 ├── src/                         # Dominio de la aplicación
+│   ├── __init__.py
 │   ├── cliente/
+│   │   ├── __init__.py
 │   │   ├── cliente_base.py
 │   │   ├── cliente_concreto.py
 │   │   ├── cliente_decorator.py
@@ -27,47 +35,60 @@ Entrega2_MDD/
 │   │   ├── envio_gratis_decorator.py
 │   │   └── tipo_cliente.py
 │   ├── producto/
+│   │   ├── __init__.py
 │   │   └── producto.py
 │   ├── pedidos/
+│   │   ├── __init__.py
 │   │   ├── estado_pedido.py
 │   │   ├── pedido.py
 │   │   ├── estandar_pedido.py
 │   │   ├── express_pedido.py
 │   │   ├── internacional_pedido.py
 │   │   ├── programado_pedido.py
+│   │   ├── pedido_cambio_fecha.py
+│   │   ├── pedido_con_cobro.py
 │   │   └── gestor_pedido.py
 │   ├── pagos/
+│   │   ├── __init__.py
 │   │   ├── metodo_pago.py
 │   │   ├── pago_tarjeta.py
 │   │   ├── pago_transferencia.py
 │   │   ├── pago_cripto.py
 │   │   ├── pago_contra_entrega.py
 │   │   ├── pago_QR.py
+│   │   ├── proxy_pago.py
 │   │   ├── proxy_pagoQR.py      # 🆕 Proxy para pago QR
 │   │   └── gestor_metodos_pago.py
 │   ├── factura/
+│   │   ├── __init__.py
 │   │   └── factura.py
 │   ├── auditoria/
+│   │   ├── __init__.py
 │   │   └── registro_transacciones.py
 │   └── seguridad/
+│       ├── __init__.py
 │       └── gestor_tokens_temporales.py
 ├── api/                         # 🆕 Capa MVC
+│   ├── __init__.py
+│   ├── dependencies.py          # Gestión de dependencias
 │   ├── modelos/
+│   │   ├── __init__.py
 │   │   └── schemas.py           # DTOs/Schemas de Pydantic
 │   ├── servicios/
+│   │   ├── __init__.py
 │   │   ├── cliente_service.py   # Lógica de negocio - Clientes
 │   │   ├── producto_service.py  # Lógica de negocio - Productos
 │   │   ├── token_service.py     # Lógica de negocio - Tokens
 │   │   └── pago_service.py      # Lógica de negocio - Pagos
-│   ├── controladores/
-│   │   ├── cliente_controller.py    # Endpoints - Clientes
-│   │   ├── producto_controller.py   # Endpoints - Productos
-│   │   ├── token_controller.py      # Endpoints - Tokens
-│   │   ├── pago_controller.py       # Endpoints - Pagos
-│   │   ├── health_controller.py     # Endpoints - Health
-│   │   └── main_router.py           # Router principal
-│   └── dependencies.py          # Gestión de dependencias
-└── main.py                      # Archivo con ejemplos del dominio
+│   └── controladores/
+│       ├── __init__.py
+│       ├── cliente_controller.py    # Endpoints - Clientes
+│       ├── producto_controller.py   # Endpoints - Productos
+│       ├── token_controller.py      # Endpoints - Tokens
+│       ├── pago_controller.py       # Endpoints - Pagos
+│       ├── health_controller.py     # Endpoints - Health
+│       └── main_router.py           # Router principal
+└── __pycache__/                 # Cache de Python (generado automáticamente)
 ```
 
 ## 🛠️ Instalación y Configuración
