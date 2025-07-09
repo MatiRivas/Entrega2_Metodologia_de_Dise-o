@@ -36,3 +36,5 @@
 [2025-07-08 14:02:19] TRANSACCION FALLIDA | ID: d17a51f1-23f6-45d9-a822-c6c1bc748bae | Monto: 2500.5 | Metodo: QR | Cliente: juan.perez@example.com | Razon: Token temporal inválido o expirado
 [2025-07-08 14:08:28] TRANSACCION EXITOSA | ID: 7b1d5765-b21d-4638-a242-b14f7eb1001f | Monto: 2500.5 | Metodo: QR | Cliente: juan.perez@example.com
 [2025-07-08 14:08:32] TRANSACCION FALLIDA | ID: 70a87416-204c-4e32-bcf5-d4713629cd79 | Monto: 2500.5 | Metodo: QR | Cliente: juan.perez@example.com | Razon: Token temporal inválido o expirado
+[2025-07-08 18:44:56] TRANSACCION EXITOSA | ID: 892ace24-5508-4f5b-9154-8107a248a97b | Monto: 2500.5 | Metodo: QR | Cliente: juan.perez@example.com
+[2025-07-08 18:45:02] TRANSACCION FALLIDA | ID: 049b8906-a1cb-45ec-ad68-775cd5bb1ca1 | Monto: 2500.5 | Metodo: QR | Cliente: juan.perez@example.com | Razon: Token temporal inválido o expirado

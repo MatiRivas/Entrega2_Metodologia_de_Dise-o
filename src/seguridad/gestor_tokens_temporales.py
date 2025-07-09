@@ -8,7 +8,7 @@ class GestorTokensTemporales:
     # ¡En un entorno real, DEBE obtenerse de variables de entorno o un servicio de secretos!
     SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your_very_strong_and_secret_key_for_uvshop_2025")
     ALGORITHM = "HS256"
-    TOKEN_EXPIRATION_SECONDS = 10 # Reducido a 10 segundos para pruebas más rápidas
+    TOKEN_EXPIRATION_SECONDS = 60 # Reducido a 60 segundos para pruebas más rápidas
 
     def generar_token(self, cliente_email: str) -> str:
         expire_time = datetime.datetime.now(timezone.utc) + timedelta(seconds=self.TOKEN_EXPIRATION_SECONDS)
