@@ -23,16 +23,16 @@ class ProxyPagoQR(MetodoPago):
         self._token_actual = token_temporal
 
     def procesar_pago(self, monto: float) -> bool:
-        Cliente =self._cliente_actual
+        cliente =self._cliente_actual
         token_temporal = self._token_actual
         
         # Validar que el cliente y el token son proporcionados (son cruciales para este proxy)
-        if not Cliente or not token_temporal:
+        if not cliente or not token_temporal:
             print("[ProxyPagoQR] Error: Datos QR no establecidos")
             return False
 
         transaccion_id = str(uuid.uuid4())
-        cliente_email = Cliente.get_email()
+        cliente_email = cliente.get_email()
 
         print(f"\n[ProxyPagoQR] --- Iniciando flujo de pago QR para {cliente_email} (ID Transacción: {transaccion_id}) ---")
 
@@ -52,7 +52,7 @@ class ProxyPagoQR(MetodoPago):
         # 3. Delegar al Sujeto Real (PagoCodigoQR)
         try:
             
-            exito_pago_real = self._metodo_pago_real.procesar_pago(monto, cliente=Cliente) 
+            exito_pago_real = self._metodo_pago_real.procesar_pago(monto, cliente=cliente) 
             
             # 4. Registro de Transacciones Exitosas y Fallidas
             if exito_pago_real:
