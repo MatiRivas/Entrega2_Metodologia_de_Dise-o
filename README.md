@@ -20,8 +20,6 @@ Entrega2_Metodologia_de_Dise-o/
 ├── main.py                      # Archivo con ejemplos del dominio
 ├── requirements.txt             # Dependencias del proyecto
 ├── README.md                    # Documentación principal
-├── ARQUITECTURA_MVC.md         # Documentación de arquitectura
-├── EJEMPLOS_USO.md             # Ejemplos de uso de la API
 ├── log_uvshop_transacciones_qr.log  # Log de transacciones QR
 ├── src/                         # Dominio de la aplicación
 │   ├── __init__.py
@@ -127,10 +125,13 @@ http://localhost:8000/redoc
 http://localhost:8000/
 ```
 
-## 📚 Documentación Adicional
+## 📚 Documentación
 
-- **[ARQUITECTURA_MVC.md](ARQUITECTURA_MVC.md)**: Descripción detallada de la arquitectura MVC
-- **[EJEMPLOS_USO.md](EJEMPLOS_USO.md)**: Ejemplos prácticos de uso de la API
+Toda la documentación del proyecto está consolidada en este archivo README.md, incluyendo:
+- 🏗️ **Arquitectura MVC**: Estructura y componentes del sistema
+- 🧪 **Ejemplos de uso**: Comandos y casos prácticos
+- 📋 **Endpoints**: Lista completa de la API REST
+- 🎯 **Características**: Funcionalidades y patrones implementados
 
 ## 🔗 Endpoints Principales
 
