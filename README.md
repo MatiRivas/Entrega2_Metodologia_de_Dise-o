@@ -7,7 +7,7 @@ Este proyecto implementa un sistema de gestión de pedidos modularizado siguiend
 - ✅ **Arquitectura MVC**: Separación clara entre Modelo, Vista y Controlador
 - ✅ **API REST**: Endpoints RESTful con FastAPI
 - ✅ **Pago QR**: Sistema de pagos QR con autenticación por tokens
-- ✅ **Patrones de Diseño**: Proxy, Factory, Decorator
+- ✅ **Patrones de Diseño**: Proxy, Decorator y singleton
 - ✅ **Logging**: Registro automático de transacciones
 - ✅ **Validación**: Validación automática con Pydantic
 - ✅ **Documentación**: Swagger UI automática
@@ -199,9 +199,8 @@ curl -X POST "http://localhost:8000/pagos/procesar" \
 ## 📊 Patrones de Diseño Implementados
 
 1. **Proxy**: `ProxyPagoQR` para validación y logging
-2. **Factory**: Gestor de métodos de pago
-3. **Decorator**: Beneficios adicionales para clientes
-4. **Singleton**: Servicios compartidos
+2. **Decorator**: Beneficios adicionales para clientes
+3. **Singleton**: Servicios compartidos
 
 ## 🚀 Características Avanzadas
 
