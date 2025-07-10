@@ -19,3 +19,6 @@ class ClienteBase(ABC):
     @abstractmethod
     def get_email(self):
         pass
+    @abstractmethod
+    def get_cashback(self):
+        return 0

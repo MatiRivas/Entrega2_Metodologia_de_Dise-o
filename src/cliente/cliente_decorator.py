@@ -15,3 +15,5 @@ class ClienteDecorator(ClienteBase):
         return self._cliente.get_direccion()
     def get_email(self):
         return self._cliente.get_email()
+    def get_cashback(self):
+        return self._cliente.get_cashback()
