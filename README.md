@@ -7,7 +7,7 @@ Este proyecto implementa un sistema de gestión de pedidos modularizado siguiend
 - ✅ **Arquitectura MVC**: Separación clara entre Modelo, Vista y Controlador
 - ✅ **API REST**: Endpoints RESTful con FastAPI
 - ✅ **Pago QR**: Sistema de pagos QR con autenticación por tokens
-- ✅ **Patrones de Diseño**: Proxy, Strategy, Factory, Decorator
+- ✅ **Patrones de Diseño**: Proxy, Factory, Decorator
 - ✅ **Logging**: Registro automático de transacciones
 - ✅ **Validación**: Validación automática con Pydantic
 - ✅ **Documentación**: Swagger UI automática
@@ -15,16 +15,10 @@ Este proyecto implementa un sistema de gestión de pedidos modularizado siguiend
 ## 🏗️ Estructura del Proyecto
 
 ```
-Entrega2_Metodologia_de_Dise-o/
+Entrega2_MDD/
 ├── app.py                       # Punto de entrada FastAPI
-├── main.py                      # Archivo con ejemplos del dominio
-├── requirements.txt             # Dependencias del proyecto
-├── README.md                    # Documentación principal
-├── log_uvshop_transacciones_qr.log  # Log de transacciones QR
 ├── src/                         # Dominio de la aplicación
-│   ├── __init__.py
 │   ├── cliente/
-│   │   ├── __init__.py
 │   │   ├── cliente_base.py
 │   │   ├── cliente_concreto.py
 │   │   ├── cliente_decorator.py
@@ -33,60 +27,47 @@ Entrega2_Metodologia_de_Dise-o/
 │   │   ├── envio_gratis_decorator.py
 │   │   └── tipo_cliente.py
 │   ├── producto/
-│   │   ├── __init__.py
 │   │   └── producto.py
 │   ├── pedidos/
-│   │   ├── __init__.py
 │   │   ├── estado_pedido.py
 │   │   ├── pedido.py
 │   │   ├── estandar_pedido.py
 │   │   ├── express_pedido.py
 │   │   ├── internacional_pedido.py
 │   │   ├── programado_pedido.py
-│   │   ├── pedido_cambio_fecha.py
-│   │   ├── pedido_con_cobro.py
 │   │   └── gestor_pedido.py
 │   ├── pagos/
-│   │   ├── __init__.py
 │   │   ├── metodo_pago.py
 │   │   ├── pago_tarjeta.py
 │   │   ├── pago_transferencia.py
 │   │   ├── pago_cripto.py
 │   │   ├── pago_contra_entrega.py
 │   │   ├── pago_QR.py
-│   │   ├── proxy_pago.py
 │   │   ├── proxy_pagoQR.py      # 🆕 Proxy para pago QR
 │   │   └── gestor_metodos_pago.py
 │   ├── factura/
-│   │   ├── __init__.py
 │   │   └── factura.py
 │   ├── auditoria/
-│   │   ├── __init__.py
 │   │   └── registro_transacciones.py
 │   └── seguridad/
-│       ├── __init__.py
 │       └── gestor_tokens_temporales.py
 ├── api/                         # 🆕 Capa MVC
-│   ├── __init__.py
-│   ├── dependencies.py          # Gestión de dependencias
 │   ├── modelos/
-│   │   ├── __init__.py
 │   │   └── schemas.py           # DTOs/Schemas de Pydantic
 │   ├── servicios/
-│   │   ├── __init__.py
 │   │   ├── cliente_service.py   # Lógica de negocio - Clientes
 │   │   ├── producto_service.py  # Lógica de negocio - Productos
 │   │   ├── token_service.py     # Lógica de negocio - Tokens
 │   │   └── pago_service.py      # Lógica de negocio - Pagos
-│   └── controladores/
-│       ├── __init__.py
-│       ├── cliente_controller.py    # Endpoints - Clientes
-│       ├── producto_controller.py   # Endpoints - Productos
-│       ├── token_controller.py      # Endpoints - Tokens
-│       ├── pago_controller.py       # Endpoints - Pagos
-│       ├── health_controller.py     # Endpoints - Health
-│       └── main_router.py           # Router principal
-└── __pycache__/                 # Cache de Python (generado automáticamente)
+│   ├── controladores/
+│   │   ├── cliente_controller.py    # Endpoints - Clientes
+│   │   ├── producto_controller.py   # Endpoints - Productos
+│   │   ├── token_controller.py      # Endpoints - Tokens
+│   │   ├── pago_controller.py       # Endpoints - Pagos
+│   │   ├── health_controller.py     # Endpoints - Health
+│   │   └── main_router.py           # Router principal
+│   └── dependencies.py          # Gestión de dependencias
+└── main.py                      # Archivo con ejemplos del dominio
 ```
 
 ## 🛠️ Instalación y Configuración
@@ -125,13 +106,10 @@ http://localhost:8000/redoc
 http://localhost:8000/
 ```
 
-## 📚 Documentación
+## 📚 Documentación Adicional
 
-Toda la documentación del proyecto está consolidada en este archivo README.md, incluyendo:
-- 🏗️ **Arquitectura MVC**: Estructura y componentes del sistema
-- 🧪 **Ejemplos de uso**: Comandos y casos prácticos
-- 📋 **Endpoints**: Lista completa de la API REST
-- 🎯 **Características**: Funcionalidades y patrones implementados
+- **[ARQUITECTURA_MVC.md](ARQUITECTURA_MVC.md)**: Descripción detallada de la arquitectura MVC
+- **[EJEMPLOS_USO.md](EJEMPLOS_USO.md)**: Ejemplos prácticos de uso de la API
 
 ## 🔗 Endpoints Principales
 
@@ -221,10 +199,9 @@ curl -X POST "http://localhost:8000/pagos/procesar" \
 ## 📊 Patrones de Diseño Implementados
 
 1. **Proxy**: `ProxyPagoQR` para validación y logging
-2. **Strategy**: Diferentes métodos de pago
-3. **Factory**: Gestor de métodos de pago
-4. **Decorator**: Beneficios adicionales para clientes
-5. **Singleton**: Servicios compartidos
+2. **Factory**: Gestor de métodos de pago
+3. **Decorator**: Beneficios adicionales para clientes
+4. **Singleton**: Servicios compartidos
 
 ## 🚀 Características Avanzadas
 
@@ -265,4 +242,11 @@ curl http://localhost:8000/health/
 # Ejecutar ejemplos de las clases del dominio
 python main.py
 ```
+
+## 📋 Suposiciones del Proyecto
+
+Durante el desarrollo de este sistema, se realizó la siguiente suposición:
+
+### **Gestión de Pedidos**
+- **Modificación de Pedidos**: Se asume que cuando se modifica un pedido, únicamente se puede cambiar el **estado del pedido** (pendiente, procesando, enviado, entregado, cancelado).
 
